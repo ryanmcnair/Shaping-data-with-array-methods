@@ -123,13 +123,135 @@ businesses.forEach(business => {
       <section>
         ${business['addressCity']}, ${business['addressStateCode']} ${business['addressZipCode']}
       </section>`
-    outEl.innerHTML += '<hr/>' 
-  })
+    outEl.innerHTML += '<hr/>'
 
-const newYorkBusinesses = businesses.filter(business => {
-    let inNewYork = false
+})
+  
+// const newYorkBusinesses = businesses.filter(business => {
+//     let inNewYork = false
 
-    if (business.addressStateCode === "NY") {
-        inNewYork = true
+//     if (business.addressStateCode === "NY") {
+//         inNewYork = true
+//     }
+
+//     return inNewYork
+// });
+
+// outEl.innerHTML = '<h1>New York Businesses</h1>'
+
+// newYorkBusinesses.forEach(newYorkBusinesses => {
+//     outEl.innerHTML += `
+//       <h2>${newYorkBusinesses.companyName}</h2>
+//       <section>
+//         ${newYorkBusinesses.addressFullStreet}
+//       </section>
+//       <section>
+//         ${newYorkBusinesses['addressCity']}, ${newYorkBusinesses['addressStateCode']} ${newYorkBusinesses['addressZipCode']}
+//       </section>`
+//     outEl.innerHTML += '<hr/>'
+
+// })
+
+// const manufacturingBusinesses = businesses.filter (business => {
+//     let manufacturing = false
+
+//     if (business.companyIndustry === "Manufacturing") {
+//         manufacturing = true
+//     }
+
+//     return manufacturing
+// });
+
+// outEl.innerHTML = '<h1>Manufacturing Businesses</h1>'
+
+// manufacturingBusinesses.forEach(manufacturingBusinesses => {
+//     outEl.innerHTML += `
+//       <h2>${manufacturingBusinesses.companyName}</h2>
+//       <section>
+//         ${manufacturingBusinesses.addressFullStreet}
+//       </section>
+//       <section>
+//         ${manufacturingBusinesses['addressCity']}, ${manufacturingBusinesses['addressStateCode']} ${manufacturingBusinesses['addressZipCode']}
+//       </section>`
+//     outEl.innerHTML += '<hr/>';
+// })
+
+outEl.innerHTML += "<h1>Purchasing Agents</h1>";
+
+const agents = businesses.map(agent => {
+    return { "fullName": agent.purchasingAgent.nameFirst + " " + agent.purchasingAgent.nameLast ,
+    "company": agent.companyName,
+   "phoneNumber": agent.phoneWork,
+}
+})
+
+console.table(agents)
+
+agents.forEach(agent => {
+    outEl.innerHTML += `<h2>${agent["fullName"]}</h2>`;
+    outEl.innerHTML += `<h3>${agent["company"]}</h3>`;
+    outEl.innerHTML += `<h3>${agent["phoneNumber"]}</h3>`;
+    outEl.innerHTML += "<hr/>";
+});
+
+// document
+//     .querySelector("#companySearch")
+//     .addEventListener("keypress", keyPressEvent => {
+//         if (keyPressEvent.charCode === 13) {
+//             const foundBusiness = businesses.find(
+//                 business =>
+//                     business.companyName.includes(keyPressEvent.target.value)
+//             );
+
+//             outEl.innerHTML = `
+//                 <h2>
+//                 ${foundBusiness.companyName}
+//                 </h2>
+//                 <section>
+//                 ${foundBusiness.addressFullStreet}
+
+//                 </section>
+//                 <section>
+//                 ${foundBusiness.addressCity},
+//                 ${foundBusiness.addressStateCode}
+//                 ${foundBusiness.addressZipCode}
+//                 </section>
+//             `;
+//         }
+//     });
+
+// const monthlyRainfall = [23, 13, 27, 20, 20, 31, 33, 26, 19, 12, 14, 12, 10]
+
+// const totalRainfall = monthlyRainfall.reduce((currentTotal, nextValue) => currentTotal += nextValue, 0)
+    
+// console.log(totalRainfall)
+
+// const words = ["The", "quick", "brown", "fox", "jumped", "over", "the", "lazy", "dog"]
+
+// const sentence = words.reduce((currentWord, nextWord) => currentWord += nextWord,)
+
+// console.log(sentence)
+
+const bigSpenders = businesses.filter (business => {
+    let spender = false
+
+    if (business.orders > 9000) {
+        spender = true
     }
+
+    return spender
+})
+
+outEl.innerHTML = '<h1>Spending over nine thousand</h1>'
+
+bigSpenders.forEach(bigSpenders => {
+    outEl.innerHTML += `
+      <h2>${bigSpenders.companyName}</h2>
+      <section>
+        ${bigSpenders.addressFullStreet}
+      </section>
+      <section>
+        ${bigSpenders['addressCity']}, ${bigSpenders['addressStateCode']} ${bigSpenders['addressZipCode']}
+      </section>`
+    outEl.innerHTML += '<hr/>'
 })
